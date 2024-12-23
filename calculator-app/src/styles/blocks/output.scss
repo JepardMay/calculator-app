@@ -1,0 +1,32 @@
+.output {
+  width: 100%;
+  min-height: 88px;
+  margin-bottom: 24px;
+  padding: 10px 33px;
+  line-height: 1.2;
+  text-align: right;
+  color: var(--text-contrast-color);
+  background-color: var(--screen-bg);
+  border-radius: 8px;
+
+  @include tablet {
+    min-height: 128px;
+  }
+
+  &__previous,
+  &__current {
+    margin: 0;
+    word-break: break-all;
+  }
+
+  &__previous {
+    min-height: 12px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    opacity: 0.5;
+  }
+
+  &__current {
+    font-size: 47px;
+  }
+}

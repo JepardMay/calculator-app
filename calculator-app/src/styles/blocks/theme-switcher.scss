@@ -1,0 +1,57 @@
+.theme-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-top: 16px;
+
+  @include tablet {
+    padding-top: 11px;
+  }
+
+  &__label {
+    margin-right: 25px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  &__list {
+    position: absolute;
+    top: -8px;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+    padding: 0 9px;
+    font-size: 12px;
+    list-style: none;
+
+    @include tablet {
+      top: -13px;
+    }
+  }
+
+  &__bar {
+    position: relative;
+    flex-shrink: 0;
+    width: 70px;
+    height: 25px;
+    background-color: var(--secondary-bg);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 8px);
+      left: 4px;
+
+      width: 16px;
+      height: 16px;
+      background-color: var(--key-conrast-bg);
+      border-radius: 50%;
+    }
+  }
+}

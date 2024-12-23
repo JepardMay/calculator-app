@@ -1,6 +1,9 @@
 import React from 'react';
 
 const ThemeSwitcher = () => {
+  const onClick = (evt: React.MouseEvent<HTMLElement>) => {
+  };
+
   return (
     <div className="theme-switcher">
       <div className="theme-switcher__label">Theme</div>
@@ -9,8 +12,8 @@ const ThemeSwitcher = () => {
         <li>2</li>
         <li>3</li>
       </ul>
-      <div className="theme-switcher__bar">
-      </div>
+      <button className="theme-switcher__bar" type="button" onClick={onClick}>
+      </button>
     </div>
   )
 };

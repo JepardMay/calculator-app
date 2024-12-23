@@ -1,0 +1,120 @@
+// Colors
+
+// Theme 1
+// backgrounds
+$color-gulf-blue:                 #3a4764;
+$color-bunting:                   #232c43;
+$color-midnight-express:          #182034;
+// keys
+$color-waikawa-grey:              #637097;
+$color-astronaut:                 #404e72;
+$color-persian-red:               #d03f2f;
+$color-mandarian-orange:          #93261a;
+$color-spring-wood:               #eae3dc;
+$color-cloudy:                    #b4a597;
+//text
+$color-blue-zodiac:               #444b5a;
+
+//Theme 2
+// backgrounds
+$color-whisper:                   #e6e6e6;
+$color-very-light-grey:           #d1cccc;
+$color-whisper-1:                 #ededed;
+// keys
+$color-paradiso:                  #377f86;
+$color-blue-stone:                #1b5f65;
+$color-tenne:                     #ca5502;
+$color-saddle-brown:              #893901;
+$color-wan-white:                 #e5e4e1;
+$color-napa:                      #a69d91;
+//text
+$color-el-paso:                   #35352c;
+
+//Theme 3
+// backgrounds
+$color-blackcurrant:              #160628;
+$color-blackcurrant-1:            #1d0934;
+// keys
+$color-indigo:                    #58077d;
+$color-electric-purple:           #bc15f4;
+$color-bright-turquoise:          #00e0d1;
+$color-baby-blue:                 #6cf9f2;
+$color-violent-violet:            #341c4f;
+$color-vivid-violet:              #871c9c;
+//text
+$color-gorse:                     #ffe53d;
+$color-black-pearl:               #1b2428;
+
+
+$color-white:                     #ffffff;
+$color-transparent:                 transparent;
+
+// Typography
+
+$font-size:                         32px;
+
+$font-family:                       'Spartan', sans-serif;
+
+$transition-default:                0.3s ease-in-out;
+
+$vp--768:                           768px;
+$vp--1024:                          1024px;
+$vp--1440:                          1440px;
+
+// Themes
+// Theme 1
+:root {
+  // bg
+  --main-bg:                        #{$color-gulf-blue};
+  --secondary-bg:                   #{$color-bunting};
+  --screen-bg:                      #{$color-midnight-express};
+  // keystone
+  --key-bg:                         #{$color-waikawa-grey};
+  --key-shadow:                     #{$color-astronaut};
+  --key-conrast-bg:                 #{$color-persian-red};
+  --key-conrast-shadow:             #{$color-mandarian-orange};
+  --key-light-bg:                   #{$color-spring-wood};
+  --key-light-shadow:               #{$color-cloudy};
+  // text
+  --text-color:                     #{$color-blue-zodiac};
+  --text-contrast-color:            #{$color-white};
+  --text-secondary-color:           #{$color-blue-zodiac};
+}
+
+// Theme 2
+html.light {
+  // bg
+  --main-bg:                        #{$color-whisper};
+  --secondary-bg:                   #{$color-very-light-grey};
+  --screen-bg:                      #{$color-whisper-1};
+  // keystone
+  --key-bg:                         #{$color-paradiso};
+  --key-shadow:                     #{$color-blue-stone};
+  --key-conrast-bg:                 #{$color-tenne};
+  --key-conrast-shadow:             #{$color-saddle-brown};
+  --key-light-bg:                   #{$color-wan-white};
+  --key-light-shadow:               #{$color-napa};
+  // text
+  --text-color:                     #{$color-el-paso};
+  --text-contrast-color:            #{$color-el-paso};
+  --text-secondary-color:           #{$color-white};
+}
+
+// Theme 3
+html.colorful {
+  // bg
+  --main-bg:                        #{$color-blackcurrant};
+  --secondary-bg:                   #{$color-blackcurrant-1};
+  --screen-bg:                      #{$color-blackcurrant-1};
+  // keystone
+  --key-bg:                         #{$color-indigo};
+  --key-shadow:                     #{$color-electric-purple};
+  --key-conrast-bg:                 #{$color-bright-turquoise};
+  --key-conrast-shadow:             #{$color-baby-blue};
+  --key-light-bg:                   #{$color-violent-violet};
+  --key-light-shadow:               #{$color-vivid-violet};
+  // text
+  --text-color:                     #{$color-gorse};
+  --text-secondary-color:           #{$color-black-pearl};
+  --text-contrast-color:            #{$color-white};
+}

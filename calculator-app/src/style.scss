@@ -1,0 +1,19 @@
+// Normalizer
+@import "./styles/normalize";
+
+// Global
+@import "./styles/variables";
+@import "./styles/mixins";
+@import "./styles/global/font";
+@import "./styles/global/global";
+@import "./styles/global/container";
+
+// Blocks
+@import "./styles/blocks/main";
+@import "./styles/blocks/header";
+@import "./styles/blocks/theme-switcher";
+@import "./styles/blocks/calculator";
+@import "./styles/blocks/output";
+@import "./styles/blocks/keys";
+@import "./styles/blocks/key";
+@import "./styles/blocks/attribution";

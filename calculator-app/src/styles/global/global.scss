@@ -1,0 +1,80 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: $font-size;
+  line-height: 120%;
+  font-family: $font-family;
+  color: var(--text-contrast-color);
+
+  background-color: var(--main-bg);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  position: relative;
+
+  color: var(--key-conrast-bg);
+  text-decoration: none;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 0;
+
+    width: 60%;
+    height: 2px;
+    background-color: var(--key-conrast-bg);
+    transform: scaleX(0);
+    transform-origin: left top;
+    
+    transition: transform $transition-default;
+  }
+  
+  &::after {
+    top: calc(100% + 2px);
+    left: unset;
+    right: 0;
+
+    transform-origin: right bottom;
+  }
+
+  &:hover,
+  &:focus {
+    &::before,
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+button,
+[type="button"],
+[type="reset"] {
+  appearance: none;
+}
