@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 interface Props {
   value: string;
   mod: string;
+  active: boolean;
+  onActivate: (key: string) => void;
 }
 
-const Key = ({ value, mod }: Props) => {
+const Key = ({ value, mod, active, onActivate }: Props) => {
   const { state, dispatch } = useContext(CalculatorContext);
   const { input, result } = state;
 
@@ -20,7 +22,7 @@ const Key = ({ value, mod }: Props) => {
       dispatch({ type: 'RESET' });
     } else if (value === 'Del') {
       dispatch({ type: 'DEL' });
-    } else if (result !== '' && ['+', '-', '*', '/'].includes(value)) {
+    } else if (result !== '' && result !== 'Error' && ['+', '-', '*', '/'].includes(value)) {
       dispatch({ type: 'SET_INPUT', payload: result + value });
     } else {
       dispatch({ type: 'SET_INPUT', payload: input + value });
@@ -45,8 +47,10 @@ const Key = ({ value, mod }: Props) => {
 
     if (key in keyMap) {
       handleClick(keyMap[key]);
+      const activeKey = keyMap[key] === '*' ? 'x' : keyMap[key];
+      onActivate(activeKey);
     }
-  }, [handleClick]);
+  }, [handleClick, onActivate]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -57,7 +61,11 @@ const Key = ({ value, mod }: Props) => {
   }, [handleKeyDown]);
   
   return (
-    <button className={mod ? 'key key--' + mod : 'key'} type='button' onClick={() => handleClick(value)}>
+    <button
+      className={`key ${active ? 'key--active' : ''} ${mod ? 'key--' + mod : ''}`}
+      type='button'
+      onClick={ () => handleClick(value)}
+    >
       <span>{value}</span>
     </button>
   )
@@ -66,6 +74,8 @@ const Key = ({ value, mod }: Props) => {
 Key.propTypes = {
   value: PropTypes.string.isRequired,
   mod: PropTypes.string,
+  active: PropTypes.bool.isRequired,
+  onActivate: PropTypes.func.isRequired,
 };
 
 export default Key;

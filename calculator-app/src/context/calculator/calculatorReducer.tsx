@@ -40,7 +40,7 @@ const calculatorReducer = (state: State, action: Action) => {
       } catch (error) {
         return {
           ...state,
-          result: 'Math Error',
+          result: 'Error',
           input: ''
         };
       }

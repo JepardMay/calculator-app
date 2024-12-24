@@ -9,10 +9,6 @@
   background-color: var(--screen-bg);
   border-radius: 8px;
 
-  @include tablet {
-    min-height: 128px;
-  }
-
   &__previous,
   &__current {
     margin: 0;
@@ -27,6 +23,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
   }
