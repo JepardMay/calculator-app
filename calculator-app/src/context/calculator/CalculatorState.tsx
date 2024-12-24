@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useReducer, ReactNode, useMemo } from 'react';
 import calculatorReducer from './calculatorReducer';
 
 import {
@@ -27,6 +27,10 @@ export const CalculatorContext = createContext<{
 
 const CalculatorProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
+  const value = useMemo(() => ({
+    state,
+    dispatch,
+  }), [state, dispatch]);
 
   const setInput = (value: string) => {
     dispatch({
@@ -61,12 +65,7 @@ const CalculatorProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   return (
-    <CalculatorContext.Provider
-      value={{
-        state,
-        dispatch
-      }}
-    >
+    <CalculatorContext.Provider value={value}>
       {children}
     </CalculatorContext.Provider>
   )

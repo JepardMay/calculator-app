@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import { CalculatorContext } from '../context/calculator/CalculatorState';
 import PropTypes from 'prop-types';
 
@@ -9,29 +9,52 @@ interface Props {
 
 const Key = ({ value, mod }: Props) => {
   const { state, dispatch } = useContext(CalculatorContext);
-  const { input, result, previousResult } = state;
+  const { input, result } = state;
 
-  const handleClick = (value: string) => {
+  const handleClick = useCallback((value: string) => {
+    value = value === 'x' ? '*' : value;
+
     if (value === '=') {
       dispatch({ type: 'EVALUATE' });
     } else if (value === 'Reset') {
       dispatch({ type: 'RESET' });
     } else if (value === 'Del') {
       dispatch({ type: 'DEL' });
-    } else if (result !== '') {
-       if (value === 'x') {
-        dispatch({ type: 'SET_INPUT', payload: previousResult[previousResult.length - 1] + '*' });
-      } else {
-        dispatch({ type: 'SET_INPUT', payload: previousResult[previousResult.length - 1] + value });
-      }
+    } else if (result !== '' && ['+', '-', '*', '/'].includes(value)) {
+      dispatch({ type: 'SET_INPUT', payload: result + value });
     } else {
-       if (value === 'x') {
-        dispatch({ type: 'SET_INPUT', payload: input + '*' });
-      } else {
-        dispatch({ type: 'SET_INPUT', payload: input + value });
-      }
+      dispatch({ type: 'SET_INPUT', payload: input + value });
     }
-  };
+  }, [dispatch, input, result]);
+
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    const { key } = event;
+
+    // Mapping key presses to calculator actions
+    const keyMap: { [key: string]: string } = {
+      'Enter': '=',
+      '=': '=',
+      'Backspace': 'Del',
+      'c': 'Reset',
+      'Escape': 'Reset',
+      '0': '0', '1': '1', '2': '2', '3': '3',
+      '4': '4', '5': '5', '6': '6', '7': '7',
+      '8': '8', '9': '9', '.': '.', ',': '.',
+      '+': '+', '-': '-', '*': '*', '/': '/'
+    };
+
+    if (key in keyMap) {
+      handleClick(keyMap[key]);
+    }
+  }, [handleClick]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
   
   return (
     <button className={mod ? 'key key--' + mod : 'key'} type='button' onClick={() => handleClick(value)}>

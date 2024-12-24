@@ -15,12 +15,12 @@ const initialState: State = {
 };
 
 const calculatorReducer = (state: State, action: Action) => {
-      console.log(state.input)
   switch (action.type) {
     case SET_INPUT: 
       return {
         ...state,
-        input: action.payload
+        input: action.payload,
+        result: ''
       };
     case SET_RESULT:
       return {
@@ -29,12 +29,13 @@ const calculatorReducer = (state: State, action: Action) => {
       };
     case EVALUATE: 
       try {
-        const evalResult = eval(state.input); 
+        const evalResult = eval(state.input).toString(); 
+        const newPreviousResults = [...state.previousResult, state.input + '=' + evalResult];
         return {
           ...state,
-          result: evalResult.toString(),
+          result: evalResult,
           input: '',
-          previousResult: [...state.previousResult, state.result],
+          previousResult: newPreviousResults
         };
       } catch (error) {
         return {
