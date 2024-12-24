@@ -8,6 +8,7 @@
   list-style: none;
   background-color: var(--secondary-bg);
   border-radius: 8px;
+  transition: background-color $transition-default;
 
   @include tablet {
     gap: 25px;

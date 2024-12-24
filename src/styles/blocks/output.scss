@@ -8,6 +8,8 @@
   color: var(--text-contrast-color);
   background-color: var(--screen-bg);
   border-radius: 8px;
+  transition: color $transition-default,
+    background-color $transition-default;
 
   &__previous,
   &__current {

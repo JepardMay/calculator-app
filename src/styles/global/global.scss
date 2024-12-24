@@ -28,6 +28,9 @@ body {
 
   background-color: var(--main-bg);
 
+  transition: color $transition-default,
+    background-color $transition-default;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -39,6 +42,8 @@ a {
 
   color: var(--key-conrast-bg);
   text-decoration: none;
+  
+  transition: color $transition-default;
 
   &::before,
   &::after {
@@ -52,8 +57,9 @@ a {
     background-color: var(--key-conrast-bg);
     transform: scaleX(0);
     transform-origin: left top;
-    
-    transition: transform $transition-default;
+      
+    transition: transform $transition-default,
+      background-color $transition-default;
   }
   
   &::after {

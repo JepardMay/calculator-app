@@ -79,6 +79,7 @@ $vp--1440:                          1440px;
   --text-color:                     #{$color-blue-zodiac};
   --text-contrast-color:            #{$color-white};
   --text-secondary-color:           #{$color-blue-zodiac};
+  --switch-left-position:           4px;
 }
 
 // Theme 2
@@ -97,7 +98,9 @@ html.light {
   // text
   --text-color:                     #{$color-el-paso};
   --text-contrast-color:            #{$color-el-paso};
+  --text-secondary-color:           #{$color-blue-zodiac};
   --text-secondary-color:           #{$color-white};
+  --switch-left-position:           26px;
 }
 
 // Theme 3
@@ -117,4 +120,5 @@ html.colorful {
   --text-color:                     #{$color-gorse};
   --text-secondary-color:           #{$color-black-pearl};
   --text-contrast-color:            #{$color-white};
+  --switch-left-position:           50px;
 }

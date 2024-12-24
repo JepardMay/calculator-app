@@ -41,17 +41,20 @@
     border: none;
     border-radius: 12px;
     cursor: pointer;
+    transition: background-color $transition-default;
 
     &::before {
       content: "";
       position: absolute;
       top: calc(50% - 8px);
-      left: 4px;
+      left: var(--switch-left-position);
 
       width: 16px;
       height: 16px;
       background-color: var(--key-conrast-bg);
       border-radius: 50%;
+      transition: left $transition-default,
+        background-color $transition-default;
     }
   }
 }
