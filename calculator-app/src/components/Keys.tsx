@@ -1,7 +1,7 @@
 import React from 'react';
 import Key from './Key';
 
-const Keys = () => {
+const Keys: React.FC = () => {
   const keysArr = [
     '7', '8', '9', 'Del', '4', '5', '6', '+', '1', '2', '3', '-', '.', '0', '/', 'x', 'Reset', '='
   ]; 

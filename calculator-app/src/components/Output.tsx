@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CalculatorContext } from '../context/calculator/CalculatorState';
 
-const Output = () => {
+const Output: React.FC = () => {
+  const { state } = useContext(CalculatorContext);
+  const { input, result, previousResult } = state;
+
   return (
     <div className="output">
       <p className="output__previous">
-        {/* { outputPrevious } { operation } */}
+        {previousResult[previousResult.length - 1]}
       </p>
       <p className="output__current">
-        {/* { outputCurrent } */}
+        {result !== '' ? result : input}
       </p>
     </div>
   )

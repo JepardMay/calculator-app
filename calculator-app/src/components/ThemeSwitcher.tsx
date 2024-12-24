@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher: React.FC = () => {
   const onClick = (evt: React.MouseEvent<HTMLElement>) => {
   };
 

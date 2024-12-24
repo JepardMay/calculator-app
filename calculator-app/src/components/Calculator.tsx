@@ -2,11 +2,11 @@ import React from 'react';
 import Output from './Output';
 import Keys from './Keys';
 
-const Calculator = () => {
+const Calculator: React.FC = () => {
   return (
     <div className="calculator">
       <Output />
-      <Keys/>
+      <Keys />
     </div>
   )
 }
