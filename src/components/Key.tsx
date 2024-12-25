@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useCallback } from 'react';
 import { CalculatorContext } from '../context/calculator/CalculatorState';
+import { isOperator, shouldReplaceLastOperator, shouldIgnoreDot, shouldIgnoreInitialOperator } from '../utils/calculatorUtils';
+import { keyMap } from '../utils/keyUtils';
 
 interface Props {
   value: string;
@@ -12,45 +14,41 @@ const Key = ({ value, mod, active, onActivate }: Props) => {
   const { state, dispatch } = useContext(CalculatorContext);
   const { input, result } = state;
 
-  const isOperator = (char: string) => ['+', '-', '*', '/'].includes(char);
-
-  const hasTwoDots = (input: string, value: string) => {
-    const regex = new RegExp(`[${['+', '\\-', '*', '/'].join('')}]`);
-    const numbers = input.split(regex);
-    return numbers[numbers.length - 1].indexOf('.') !== -1 && value === '.';
-  };
-
   const handleClick = useCallback((value: string) => {
     const lastCharacter = input?.charAt(input.length - 1);
     value = value === 'x' ? '*' : value;
 
-    // Check if there is two non-numerical symbols in a row
-    if (isOperator(value) && isOperator(lastCharacter)) {
-      dispatch({ type: 'SET_INPUT', payload: input.slice(0, -1) + value});
+    const setInput = (payload: string) => dispatch({ type: 'SET_INPUT', payload });
+
+    if (shouldReplaceLastOperator(value, lastCharacter)) {
+      setInput(input.slice(0, -1) + value);
       return;
     }
 
-    // Check if there is two dots in a row or if there's already been a dot
-    if (value === '.' && (lastCharacter === '.' || hasTwoDots(input, value))) {
-      dispatch({ type: 'SET_INPUT', payload: input});
+    if (shouldIgnoreDot(value, lastCharacter, input)) {
+      setInput(input);
       return;
     }
 
-    // Set action according to value
+    if (shouldIgnoreInitialOperator(value, input)) {
+      return;
+    }
+
     if (value === '=') {
-      // Remove the last operator symbol if exists
+      if (input === '') return;
+
       if (isOperator(lastCharacter)) {
-        dispatch({ type: 'SET_INPUT', payload: input.slice(0, -1)});
+        setInput(input.slice(0, -1));
       }
       dispatch({ type: 'EVALUATE' });
     } else if (value === 'Reset') {
       dispatch({ type: 'RESET' });
     } else if (value === 'Del') {
       dispatch({ type: 'DEL' });
-    } else if (result !== '' && result !== 'Error' && isOperator(value)) {
-      dispatch({ type: 'SET_INPUT', payload: result + value });
+    } else if (result !== '' && result !== 'Error' && isOperator(value) && value !== '-') {
+      setInput(result + value);
     } else {
-      dispatch({ type: 'SET_INPUT', payload: input + value });
+      setInput(input + value);
     }
   }, [dispatch, input, result]);
 
@@ -58,18 +56,6 @@ const Key = ({ value, mod, active, onActivate }: Props) => {
     const { key } = event;
 
     // Mapping key presses to calculator actions
-    const keyMap: { [key: string]: string } = {
-      'Enter': '=',
-      '=': '=',
-      'Backspace': 'Del',
-      'c': 'Reset',
-      'Escape': 'Reset',
-      '0': '0', '1': '1', '2': '2', '3': '3',
-      '4': '4', '5': '5', '6': '6', '7': '7',
-      '8': '8', '9': '9', '.': '.', ',': '.',
-      '+': '+', '-': '-', '*': '*', '/': '/'
-    };
-
     if (key in keyMap) {
       handleClick(keyMap[key]);
       const activeKey = keyMap[key] === '*' ? 'x' : keyMap[key];
