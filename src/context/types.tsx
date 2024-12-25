@@ -4,8 +4,6 @@ export const SET_INPUT = 'SET_INPUT';
 export const SET_RESULT = 'SET_RESULT';
 export const EVALUATE = 'EVALUATE';
 
-export const SET_THEME = 'SET_THEME';
-
 export type Action =
   | { type: typeof SET_INPUT; payload: string }
   | { type: typeof SET_RESULT; payload: string }

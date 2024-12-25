@@ -30,18 +30,22 @@ const Keys: React.FC = () => {
 
   return (
     <ul className='keys'>
-      {keysArr.map((key, i) => {
-        return <li className={ `${i === keysArr.length - 1 || i === keysArr.length - 2 ? 'double' : ''}` } key={ i }>
-          <Key
-            value={ key }
-            mod={setMod(key)}
-            active={ activeKey === key }
-            onActivate={(key: string) => handleKeyActivation(key)}
-          />
-        </li>
+      {keysArr.map((key) => {
+        const isDouble = key === 'Reset' || key === '=';
+        return (
+          <li className={isDouble ? 'double' : ''} key={key}>
+            <Key
+              value={key}
+              mod={setMod(key)}
+              active={activeKey === key}
+              onActivate={(k: string) => handleKeyActivation(k)}
+            />
+          </li>
+        );
       })}
     </ul>
   )
+
 }
 
 export default Keys;
