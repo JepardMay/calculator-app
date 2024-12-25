@@ -36,9 +36,15 @@ const ThemeSwitcher: React.FC = () => {
     <div className="theme-switcher">
       <div className="theme-switcher__label">Theme</div>
       <ul className="theme-switcher__list">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
+        <li>
+          <button type="button" onClick={ () => setCurrentTheme(Themes.DEFAULT) }>1</button>
+        </li>
+        <li>
+          <button type="button" onClick={ () => setCurrentTheme(Themes.LIGHT) }>2</button>
+        </li>
+        <li>
+          <button type="button" onClick={ () => setCurrentTheme(Themes.COLORFUL) }>3</button>
+        </li>
       </ul>
       <button className="theme-switcher__bar" type="button" onClick={onClick} aria-label='Switch Theme'>
       </button>

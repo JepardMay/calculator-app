@@ -8,6 +8,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 24px;
+  overflow: hidden;
 
   @include tablet {
     padding: 97px 48px;

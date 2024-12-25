@@ -8,12 +8,6 @@ import {
   Action
 } from '../types';
 
-const initialState: State = {
-  input: '',
-  result: '',
-  previousResult: [],
-};
-
 const calculatorReducer = (state: State, action: Action) => {
   switch (action.type) {
     case SET_INPUT: 
