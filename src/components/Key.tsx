@@ -30,7 +30,7 @@ const Key = ({ value, mod, active, onActivate }: Props) => {
       return;
     }
 
-    if (shouldIgnoreInitialOperator(value, input)) {
+    if (shouldIgnoreInitialOperator(value, input, result)) {
       return;
     }
 
@@ -45,7 +45,7 @@ const Key = ({ value, mod, active, onActivate }: Props) => {
       dispatch({ type: 'RESET' });
     } else if (value === 'Del') {
       dispatch({ type: 'DEL' });
-    } else if (result !== '' && result !== 'Error' && isOperator(value) && value !== '-') {
+    } else if (result !== '' && result !== 'Error' && isOperator(value)) {
       setInput(result + value);
     } else {
       setInput(input + value);

@@ -48,9 +48,13 @@ const calculatorReducer = (state: State, action: Action) => {
       return {
         ...state,
         input: state.input.substring(0, state.input.length - 1)
-      }
+      };
     case RESET:
-      return initialState;
+      return {
+        ...state,
+        result: '',
+        input: ''
+      };
     default:
       return state;
   }

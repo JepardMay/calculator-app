@@ -17,6 +17,6 @@ export const shouldIgnoreDot = (value: string, lastCharacter: string, input: str
   value === '.' && (lastCharacter === '.' || hasTwoDots(input, value));
 
 // Check if the initial input is an operator (except '-')
-export const shouldIgnoreInitialOperator = (value: string, input: string) => 
-  isOperator(value) && input === '' && value !== '-';
+export const shouldIgnoreInitialOperator = (value: string, input: string, result: string) => 
+  isOperator(value) && input === '' && value !== '-' && result === '';
   
