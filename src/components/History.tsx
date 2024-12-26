@@ -1,5 +1,6 @@
-import React, { useCallback, useState, useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { CalculatorContext } from '../context/calculator/CalculatorState';
+import useDraggable from '../hooks/useDraggable';
 
 interface Props {
   setHistoryState: (boolean: boolean) => void;
@@ -9,33 +10,21 @@ const Output = ({ setHistoryState }: Props) => {
   const historyRef = useRef<HTMLDivElement | null>(null);
   const { state } = useContext(CalculatorContext);
   const { previousResult } = state;
-
-  const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 20, y: 20 });
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const { 
+    position, 
+    handleMouseDown, 
+    handleTouchStart, 
+    handleMouseMove, 
+    handleTouchMove, 
+    handleMouseUp, 
+    handleTouchEnd 
+  } = useDraggable();
 
   const scrollToBottom = () => {
     if (historyRef.current) {
       historyRef.current.scrollTop = historyRef.current.scrollHeight;
     }
   };
-
-  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsDragging(true);
-    setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
-  }, [position]);
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (isDragging) {
-      const newX = e.clientX - offset.x;
-      const newY = e.clientY - offset.y;
-      setPosition({ x: newX, y: newY });
-    }
-  }, [isDragging, offset]);
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -44,12 +33,16 @@ const Output = ({ setHistoryState }: Props) => {
   useEffect(() => {
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [handleMouseMove, handleMouseUp]);
+  }, [handleMouseMove, handleMouseUp, handleTouchMove, handleTouchEnd]);
 
   return (
     <div
@@ -66,6 +59,7 @@ const Output = ({ setHistoryState }: Props) => {
           className="history__drag-btn"
           aria-label="Click to move" 
           onMouseDown={ handleMouseDown }
+          onTouchStart={ handleTouchStart }
         ></button>
       </div>
       { previousResult.map((result) => {
