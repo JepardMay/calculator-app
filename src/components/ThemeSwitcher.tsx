@@ -8,19 +8,23 @@ enum Themes {
 
 const ThemeSwitcher: React.FC = () => {
   const [currentTheme, setCurrentTheme] = useState(Themes.DEFAULT);
+  const [isInitialRender, setIsInitialRender] = useState(true);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('selectedTheme') as Themes;
-    if (savedTheme) {
+    if (savedTheme && savedTheme !== currentTheme) {
       setCurrentTheme(savedTheme);
       document.documentElement.className = savedTheme;
     }
+    setIsInitialRender(false);
   }, []);
 
   useEffect(() => {
-    document.documentElement.className = currentTheme;
-    localStorage.setItem('selectedTheme', currentTheme);
-  }, [currentTheme]);
+    if (!isInitialRender) {
+      document.documentElement.className = currentTheme;
+      localStorage.setItem('selectedTheme', currentTheme);
+    }
+  }, [currentTheme, isInitialRender]);
 
   const onClick = ()=> {
     if (currentTheme === Themes.DEFAULT) {
