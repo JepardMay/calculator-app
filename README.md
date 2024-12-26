@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Frontend Mentor]()
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/calculator-app-on-react-ts-O43gwkmvbp)
 - Live Site URL: 
   - [Netlify](https://super-squirrel-a6294c.netlify.app/)
 
